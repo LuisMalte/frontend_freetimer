@@ -20,14 +20,14 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: 'Restaurants',
-    to:'/restaurants',
+    name: 'Users',
+    to:'/users',
     icon: <CIcon icon={cilFastfood} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Restaurant',
-        to:'/restaurants/restaurant'
+        name: 'User',
+        to:'/users/user'
       }
     ]
   },
