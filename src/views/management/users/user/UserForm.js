@@ -9,15 +9,16 @@ import {
     CButton
 } from '@coreui/react'
 
-const RestaurantForm = () => {
-
-    const [restaurantData, setRestaurantData] = useState({
-        restaurantName: '',
-        restaurantNit: '',
-        restaurantAddress:'',
-        restaurantPhone: '',
-        cityId: 0
+const UserForm = () => {
+    const [userData, setUserData] = useState({
+        userName: '',
+        userEmail: '',
+        userPhone: '',
+        userAddress: '',
+        userPassword: '',
+        cityId: 0 
     });
+    
     const [departments, setDepartments] = useState([]);
     const [selectedDepartment, setSelectedDepartment] = useState('');
     const [cities, setCities] = useState([]);
@@ -26,13 +27,13 @@ const RestaurantForm = () => {
 
     useEffect(()=>{
         const getDepartments = async () => {
-            const response = await Axios({url:'http://localhost:1337/api/listdepartments'});
+            const response = await Axios({url:'http://localhost:3000/api/listdepartments'});
             const lstDepartments = Object.keys(response.data).map(i=> response.data[i]);
             setDepartments(lstDepartments.flat());
         }
 
         const getCities = async(departmentId)=>{
-            const response = await Axios({url: `http://localhost:1337/api/listcities/${departmentId}`});
+            const response = await Axios({url: `http://localhost:3000/api/listcities/${departmentId}`});
             const lstCities = Object.keys(response.data).map(i=> response.data[i]);
             setCities(lstCities.flat());
         }
@@ -50,30 +51,31 @@ const RestaurantForm = () => {
 
     function handleSelectCities(event){
         setSelectedCity(event.target.value);
-        setRestaurantData({
-            ...restaurantData,
+        setUserData({
+            ...userData,
             cityId: event.target.value
         })
     }
 
     function handleChange(event){
         const {name, value} = event.target;
-        setRestaurantData({
-            ...restaurantData,
+        setUserData({
+            ...userData,
             [name]: value
         });
     }
 
     function handleReturn(event){
-        navigate('/restaurants/restaurant');
+        navigate('/users/user');
     }
 
     const handleSubmit = async(event)=>{
         event.preventDefault();
         try{
-            const response = await Axios.post('http://localhost:1337/api/createrestaurant', restaurantData);
+            
+            const response = await Axios.post('http://localhost:3000/api/createuser', userData);
             console.log(response.data);
-            navigate('/restaurants/restaurant');
+            navigate('/users/user');
         }
         catch (e){
             console.log(e);
@@ -83,10 +85,10 @@ const RestaurantForm = () => {
     return(
         <CForm className="row g-3" onSubmit={handleSubmit}>
             <CCol md={12}>
-                <CFormInput type="text" id="restaurantName" name="restaurantName" label="Name" value={restaurantData.restaurantName} onChange={handleChange} />
+                <CFormInput type="text" id="userName" name="userName" label="Name" value={userData.userName} onChange={handleChange} />
             </CCol>
             <CCol md={12}>
-                <CFormInput type="text" id="restaurantNit" name="restaurantNit" label="Nit" value={restaurantData.restaurantNit} onChange={handleChange} />
+                <CFormInput type="text" id="userEmail" name="userEmail" label="Email" value={userData.userEmail} onChange={handleChange} />
             </CCol>
             <CCol xs={4}>
                 <CFormSelect id="departmentOptions" label = "Department" value={ selectedDepartment} onChange={handleSelectDepartments} >
@@ -105,10 +107,13 @@ const RestaurantForm = () => {
                 </CFormSelect>
             </CCol>
             <CCol xs={4}>
-                <CFormInput type="text" id="restaurantAddress" name="restaurantAddress" label="Address" value={restaurantData.restaurantAddress} onChange={handleChange} />
+                <CFormInput type="text" id="userAddress" name="userAddress" label="Address" value={userData.userAddress} onChange={handleChange} />
             </CCol>
             <CCol md={12}>
-                <CFormInput type="text" id="restaurantPhone" name="restaurantPhone" label="Phone" value={restaurantData.restaurantPhone} onChange={handleChange} />
+                <CFormInput type="text" id="userPhone" name="userPhone" label="Phone" value={userData.userPhone} onChange={handleChange} />
+            </CCol>
+            <CCol md={12}>
+                <CFormInput type="text" id="userPassword" name="userPassword" label="Password" value={userData.userPassword} onChange={handleChange} />
             </CCol>
             <CCol xs={6}>
                 <CButton color="primary" type="submit" >Save</CButton>
@@ -120,4 +125,4 @@ const RestaurantForm = () => {
     )
 }
 
-export default RestaurantForm
+export default UserForm
