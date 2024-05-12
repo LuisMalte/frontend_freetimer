@@ -12,11 +12,13 @@ import {
   CTableHeaderCell,
   CTableDataCell,
   
+  
 } from '@coreui/react';
 
 import{
   cilTrash,
-  cilPencil
+  cilPencil,
+  cilUserPlus
 }from '@coreui/icons';
 
 
@@ -41,10 +43,15 @@ const User = () => {
     navigate('/users/userform');
   }
 
+  function handleCreateFreetimer(userId){
+    navigate(`/users/freetimerform/${userId}`);
+  }
+  function handleCreateFulltimer(userId){
+    navigate(`/users/fulltimerform/${userId}`);
+  }
   
   function handleEdit(userId){
-    
-    navigate(`/users/usereditform/${userId}`)
+    navigate(`/users/userEditForm/${userId}`)
   }
 
    const handleDisable = async(userId) =>{
@@ -61,11 +68,18 @@ const User = () => {
   }
 
 
-
-
   return (
     <div>
-      <CButton onClick={handleCreateUser} > New User </CButton>
+      <CButton onClick={handleCreateUser} style={{ display: 'flex', alignItems: 'center' }}>
+          New User
+          <span style={{ marginLeft: '5px', fontSize: '20px' }}>
+              <div >
+                  <CIcon icon={cilUserPlus} size="xl" />
+
+              </div>
+          </span>
+      </CButton>
+
       <CTable>
         <CTableHead>
           <CTableRow>
@@ -76,6 +90,8 @@ const User = () => {
             <CTableHeaderCell>Address</CTableHeaderCell>
             <CTableHeaderCell>Password</CTableHeaderCell>
             <CTableHeaderCell>Options</CTableHeaderCell>
+            <CTableHeaderCell>Tipo de usuario</CTableHeaderCell>
+
           </CTableRow>
         </CTableHead>
         <CTableBody>
@@ -85,16 +101,22 @@ const User = () => {
                 <CTableDataCell>{user.userName}</CTableDataCell>
                 <CTableDataCell>{user.userEmail}</CTableDataCell>
                 <CTableDataCell>{user.userPhone}</CTableDataCell>
-                <CTableDataCell>{user.cityId}</CTableDataCell>
+                <CTableDataCell>{user.city.cityName}</CTableDataCell>
                 <CTableDataCell>{user.userAddress}</CTableDataCell>
                 <CTableDataCell>{user.userPassword}</CTableDataCell>
                 <CTableDataCell>
                   <CButton onClick={() => handleDisable(user.userId)} >
-                     <CIcon icon={cilTrash} /> 
+                     <CIcon icon={cilTrash}
+                     size="xl" /> 
                   </CButton>
                   <CButton onClick={() => handleEdit(user.userId)} >
-                    <CIcon icon={cilPencil} /> 
+                    <CIcon icon={cilPencil} 
+                    size="xl"/> 
                   </CButton>
+                </CTableDataCell>
+                <CTableDataCell>
+                  <CButton onClick={ ()=> handleCreateFreetimer(user.userId)} color="success" size="sm">FreeTimer</CButton>{' '}
+                  <CButton onClick={ ()=> handleCreateFulltimer(user.userId)} color="secondary" size="sm">FullTimer</CButton>
                 </CTableDataCell>
                 </CTableRow>
               ))}
