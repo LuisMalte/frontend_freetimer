@@ -4,7 +4,8 @@ import React from 'react'
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const User = React.lazy(()=> import('./views/management/users/user/User'))
 const UserForm = React.lazy(()=> import('./views/management/users/user/UserForm'))
-const UserEditForm = React.lazy(()=> import('./views/management/users/user/UserEditForm'))
+const UserEditForm = React.lazy(()=> import('./views/management/users/user/UserEditForm')) 
+ 
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
