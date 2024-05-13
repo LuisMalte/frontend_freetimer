@@ -14,7 +14,7 @@ const UserEditForm = () => {
     const { userId } = useParams();
     const [userData, setUserData] = useState({
         userName: '',
-        userEmail: '',
+        userEmail: '', //debe tener @ y terminar en .com
         userPhone: '',
         cityId: '',
         userAddress: '',
@@ -92,9 +92,13 @@ const UserEditForm = () => {
             const response = await Axios.put(`http://localhost:3000/api/updateuser/${userId}`, userData);
             console.log(response.data);
             navigate('/users/user');
+         
+
         }
         catch (e) {
+            console.error("recuerde que el email debe tener un @ y terminar en .com y no debe haber dos usuarios con el mismo correo")
             console.log(e);
+            
         }
     }
 

@@ -80,7 +80,7 @@ const Task = () => {
             <CTableHeaderCell>Task ID</CTableHeaderCell>
             <CTableHeaderCell>Name</CTableHeaderCell>
             <CTableHeaderCell>Description</CTableHeaderCell>
-            <CTableHeaderCell>Date</CTableHeaderCell>
+            <CTableHeaderCell>Creation date</CTableHeaderCell>
             <CTableHeaderCell>Offer</CTableHeaderCell>
             <CTableHeaderCell>Address</CTableHeaderCell>
             <CTableHeaderCell>Task Type</CTableHeaderCell>

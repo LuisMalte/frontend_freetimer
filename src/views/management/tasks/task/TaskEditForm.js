@@ -86,6 +86,9 @@ const TaskEditForm = () => {
             navigate('/tasks/task');
         }
         catch (e) {
+            console.error(
+                "revise que haya puesto en offer un numero"
+            )
             console.log(e);
         }
     }

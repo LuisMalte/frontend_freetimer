@@ -78,6 +78,7 @@ const UserForm = () => {
             navigate('/users/user');
         }
         catch (e){
+            console.error("recuerde que el email debe tener un @ y terminar en .com y no debe haber dos usuarios con el mismo correo")
             console.log(e);
         }
     }
